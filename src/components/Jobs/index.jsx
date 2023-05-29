@@ -3,7 +3,7 @@ import Navbar from "../Navbar";
 import { Link } from "react-router-dom";
 import "./index.css";
 import Job from "./../../Assets/jobs.json";
-import Filter from "../Filter";
+// import Filter from "../Filter";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
 const experience = [
@@ -18,35 +18,33 @@ const Jobs = () => {
   const [filteredJobs, setFilteredJobs] = useState([...JobData, ...Job]);
   const [searchterm, setSearchTerm] = useState("");
   const [active, setActive] = useState(false);
-  function handleJobFilter(event) {
-    const value = event.target.innerText;
-    event.preventDefault();
-    setFilteredJobs(
-      Job.filter((job) => {
-        return job.role === value;
-      })
-    );
-  }
+  // function handleJobFilter(event) {
+  //   const value = event.target.innerText;
+  //   event.preventDefault();
+  //   setFilteredJobs(
+  //     Job.filter((job) => {
+  //       return job.role === value;
+  //     })
+  //   );
+  // }
   function saveClick(id, logo, company, position, location, posted) {
     window.localStorage.setItem(
       "Job",
       JSON.stringify(id, logo, company, position, location, posted)
     );
-    console.log(JobData)
+    console.log(JobData);
   }
   const searchEvent = (event) => {
     const data = event.target.value;
     setSearchTerm(data);
     if (searchterm !== "" || searchterm.length > 2) {
       const filterData = Job.filter((item) => {
-        if(item)
-        {
-        return Object.values(item)
-          .join("")
-          .toLowerCase()
-          .includes(searchterm.toLowerCase());
-        }
-        else{
+        if (item) {
+          return Object.values(item)
+            .join("")
+            .toLowerCase()
+            .includes(searchterm.toLowerCase());
+        } else {
           return 0;
         }
       });
@@ -84,7 +82,6 @@ const Jobs = () => {
             {filteredJobs.map(
               ({ id, logo, company, position, location, posted, role }) => {
                 return (
-             
                   <div className="job-list">
                     <div className="job-card">
                       <div className="job-name">
@@ -127,7 +124,8 @@ const Jobs = () => {
                               );
                             }}
                           >
-                            {JSON.parse(localStorage.getItem("Job")).id ===id ? (
+                            {JSON.parse(localStorage.getItem("Job")).id ===
+                            id ? (
                               <AiFillHeart />
                             ) : (
                               <AiOutlineHeart />
@@ -142,12 +140,12 @@ const Jobs = () => {
             )}
           </div>
 
-          <Filter
+          {/* <Filter
             setFilteredJobs={setFilteredJobs}
             handleJobFilter={handleJobFilter}
             handleExperienceFilter={handleExperienceFilter}
             searchEvent={searchEvent}
-          />
+          /> */}
         </div>
       </div>
     </>
